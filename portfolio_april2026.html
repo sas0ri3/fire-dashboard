@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Update — April 22, 2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3348;
+    --accent: #5b8dee;
+    --accent2: #7c5fe6;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --orange: #fb923c;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --tag-bg: #1e2a3a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  h2 { font-size: 16px; font-weight: 600; color: var(--accent); margin: 24px 0 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  h3 { font-size: 14px; font-weight: 600; color: var(--yellow); margin: 16px 0 8px; }
+  .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+  .rates-bar {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    display: flex; gap: 24px; flex-wrap: wrap;
+    margin-bottom: 24px;
+    font-size: 12px; color: var(--muted);
+  }
+  .rates-bar span strong { color: var(--text); }
+
+  /* TOTAL HERO */
+  .total-hero {
+    background: linear-gradient(135deg, #1e2a4a 0%, #1a1d27 100%);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 28px;
+    display: flex; gap: 32px; flex-wrap: wrap; align-items: center;
+  }
+  .total-hero .main-val { font-size: 36px; font-weight: 800; color: var(--green); letter-spacing: -1px; }
+  .total-hero .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+  .total-hero .sub-val { font-size: 14px; color: var(--muted); }
+
+  /* SECTION CARD */
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .section-header {
+    background: var(--surface2);
+    padding: 10px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title { font-weight: 600; font-size: 14px; }
+  .section-total { font-weight: 700; color: var(--green); font-size: 14px; }
+  .section-total.minor { color: var(--accent); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--muted); padding: 8px 16px; text-align: right;
+    background: var(--surface2);
+  }
+  th:first-child, th:nth-child(2) { text-align: left; }
+  td { padding: 8px 16px; border-top: 1px solid var(--border); text-align: right; font-size: 13px; }
+  td:first-child, td:nth-child(2) { text-align: left; }
+  tr:hover td { background: rgba(91,141,238,0.05); }
+  .asset-name { font-weight: 500; }
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg); border-radius: 4px;
+    padding: 1px 6px; font-size: 11px; color: var(--muted);
+    margin-left: 4px;
+  }
+  .tag.green { color: var(--green); background: rgba(52,211,153,0.1); }
+  .tag.orange { color: var(--orange); background: rgba(251,146,60,0.1); }
+  .tag.blue { color: var(--accent); background: rgba(91,141,238,0.1); }
+  .val-usd { color: var(--text); font-weight: 600; }
+  .val-local { color: var(--muted); font-size: 12px; }
+  .price-cell { color: var(--text); }
+  .units-cell { color: var(--muted); font-size: 12px; }
+  .note-row td { font-size: 11px; color: var(--muted); padding: 4px 16px; border-top: none; }
+
+  /* SCENARIOS */
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 700px) { .scenario-grid { grid-template-columns: 1fr; } }
+  .scenario-card {
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .scenario-card.a { border: 1px solid rgba(91,141,238,0.5); }
+  .scenario-card.b { border: 1px solid rgba(124,95,230,0.5); }
+  .scenario-head {
+    padding: 14px 18px;
+    font-weight: 700; font-size: 14px;
+  }
+  .scenario-card.a .scenario-head { background: rgba(91,141,238,0.15); color: var(--accent); }
+  .scenario-card.b .scenario-head { background: rgba(124,95,230,0.15); color: #a78bfa; }
+  .scenario-body { padding: 14px 18px; }
+  .scenario-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+  .scenario-row .lbl { color: var(--muted); }
+  .scenario-row .val { font-weight: 600; }
+  .scenario-divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+  .scenario-total { font-size: 20px; font-weight: 800; }
+  .scenario-card.a .scenario-total { color: var(--accent); }
+  .scenario-card.b .scenario-total { color: #a78bfa; }
+
+  /* PROJECTION TABLE */
+  .proj-table-wrap { overflow-x: auto; }
+  .proj-table { min-width: 600px; }
+  .proj-head { background: rgba(91,141,238,0.1); }
+  tr.highlight td { background: rgba(52,211,153,0.05); }
+  tr.total-row td { background: var(--surface2); font-weight: 700; }
+
+  /* NOTES */
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .notes-grid { grid-template-columns: 1fr; } }
+  .note-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .note-card strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 13px; }
+
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+  .badge.up { background: rgba(52,211,153,0.15); color: var(--green); }
+  .badge.down { background: rgba(248,113,113,0.15); color: var(--red); }
+  .badge.neutral { background: var(--tag-bg); color: var(--muted); }
+
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+  .srs-note {
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--yellow);
+    margin-bottom: 16px;
+  }
+</style>
+</head>
+<body>
+
+<h1>💼 Portfolio Update</h1>
+<p class="subtitle">Prices as of <strong>April 22, 2026</strong> closing · Report generated April 23, 2026</p>
+
+<div class="rates-bar">
+  <span>💱 <strong>USD/SGD</strong> 1.2762</span>
+  <span>💱 <strong>USD/PHP</strong> 60.464</span>
+  <span>📈 <strong>AAPL</strong> $273.17</span>
+  <span>📈 <strong>NVDA</strong> $202.50</span>
+  <span>📈 <strong>GOOGL</strong> $339.32</span>
+  <span>📈 <strong>AMZN</strong> $255.36</span>
+  <span>📈 <strong>META</strong> $674.72</span>
+  <span>📈 <strong>CSPX</strong> $765.49</span>
+  <span>📈 <strong>CNDX</strong> $1,540.60</span>
+  <span>📈 <strong>VWRA</strong> $179.86</span>
+  <span>📈 <strong>LTG</strong> ₱15.02</span>
+  <span>📈 <strong>CREIT</strong> ₱3.49</span>
+</div>
+
+<!-- TOTAL HERO -->
+<div class="total-hero">
+  <div>
+    <div class="label">Total Portfolio Value</div>
+    <div class="main-val">$3,187,496</div>
+    <div class="sub-val">≈ SGD 4,067,882 &nbsp;·&nbsp; ≈ PHP 192,728,729</div>
+  </div>
+  <div>
+    <div class="label">Liquid / Investable (USD)</div>
+    <div style="font-size:22px;font-weight:700;color:var(--accent)">$2,863,930</div>
+    <div class="sub-val">excl. PH gov't, collectibles</div>
+  </div>
+  <div>
+    <div class="label">AAPL Concentration</div>
+    <div style="font-size:22px;font-weight:700;color:var(--orange)">82.9%</div>
+    <div class="sub-val">$2,641,109 vested + unvested</div>
+  </div>
+  <div>
+    <div class="label">Time to Retirement</div>
+    <div style="font-size:22px;font-weight:700;color:var(--yellow)">~4 yrs</div>
+    <div class="sub-val">Target: Apr / Oct 2030</div>
+  </div>
+</div>
+
+<div class="srs-note">
+  🎯 <strong>SRS Update:</strong> SGD 265,985 enrolled into Endowus SRS — split across 5 Amundi/Dimensional funds. Let it compound to 2030, then withdraw (50% taxable at retirement age). OCBC SRS cash balance: SGD 0.36.
+</div>
+
+<!-- ========== ETRADE ========== -->
+<h2>🏦 Etrade</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">AAPL (Apple Inc.)</span>
+    <span class="section-total">$2,641,109</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Asset</th><th>Type</th><th>Units</th><th>Price</th><th>Value (USD)</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">AAPL <span class="tag green">Vested</span></td>
+        <td>USD Equity</td>
+        <td class="units-cell">8,979.37</td>
+        <td class="price-cell">$273.17</td>
+        <td class="val-usd">$2,452,895</td>
+      </tr>
+      <tr>
+        <td class="asset-name">AAPL <span class="tag orange">Unvested</span></td>
+        <td>USD Equity</td>
+        <td class="units-cell">689.00</td>
+        <td class="price-cell">$273.17</td>
+        <td class="val-usd">$188,214</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== ETORO ========== -->
+<h2>📊 eToro</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">US Tech Stocks</span>
+    <span class="section-total">$166,190</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Asset</th><th>Currency</th><th>Units</th><th>Price</th><th>Value (USD)</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">NVDA</td><td>USD</td>
+        <td class="units-cell">129.54564</td>
+        <td class="price-cell">$202.50</td>
+        <td class="val-usd">$26,233</td>
+      </tr>
+      <tr>
+        <td class="asset-name">GOOGL</td><td>USD</td>
+        <td class="units-cell">156.90048</td>
+        <td class="price-cell">$339.32</td>
+        <td class="val-usd">$53,239</td>
+      </tr>
+      <tr>
+        <td class="asset-name">UNH <span class="tag">Closed</span></td><td>USD</td>
+        <td class="units-cell">0</td>
+        <td class="price-cell">—</td>
+        <td class="val-usd">$0</td>
+      </tr>
+      <tr>
+        <td class="asset-name">AMZN</td><td>USD</td>
+        <td class="units-cell">103.11308</td>
+        <td class="price-cell">$255.36</td>
+        <td class="val-usd">$26,331</td>
+      </tr>
+      <tr>
+        <td class="asset-name">META</td><td>USD</td>
+        <td class="units-cell">89.49893</td>
+        <td class="price-cell">$674.72</td>
+        <td class="val-usd">$60,387</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== IBKR ========== -->
+<h2>📈 IBKR (ETFs — LSE, USD-denominated)</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">Core ETF Portfolio</span>
+    <span class="section-total minor">$28,233</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Asset</th><th>Description</th><th>Units</th><th>Price (USD)</th><th>Value (USD)</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">CSNDX <span class="tag blue">CNDX.L</span></td>
+        <td>iShares NASDAQ 100 UCITS</td>
+        <td class="units-cell">0.7649</td>
+        <td class="price-cell">$1,540.60</td>
+        <td class="val-usd">$1,178</td>
+      </tr>
+      <tr>
+        <td class="asset-name">CSPX</td>
+        <td>iShares Core S&amp;P 500 UCITS</td>
+        <td class="units-cell">17.7065</td>
+        <td class="price-cell">$765.49</td>
+        <td class="val-usd">$13,554</td>
+      </tr>
+      <tr>
+        <td class="asset-name">VWRA</td>
+        <td>Vanguard FTSE All-World UCITS</td>
+        <td class="units-cell">75.0598</td>
+        <td class="price-cell">$179.86</td>
+        <td class="val-usd">$13,500</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== ENDOWUS ========== -->
+<h2>🇸🇬 Endowus SRS (SGD)</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">5-Fund SRS Portfolio · Total Invested: SGD 265,985</span>
+    <span class="section-total">≈ $208,420</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Fund</th><th>Gross CAGR</th><th>TER</th><th>Net CAGR*</th><th>Units</th><th>SGD Value</th><th>≈ USD</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">Amundi Prime US Fund</td>
+        <td>9.00%</td><td>0.05%</td><td class="tag green">8.70%</td>
+        <td class="units-cell">296.7258</td>
+        <td class="val-local">SGD 66,496</td>
+        <td class="val-usd">$52,105</td>
+      </tr>
+      <tr>
+        <td class="asset-name">Dimensional Global Core</td>
+        <td>8.50%</td><td>0.28%</td><td class="tag green">7.97%</td>
+        <td class="units-cell">855.9920</td>
+        <td class="val-local">SGD 39,898</td>
+        <td class="val-usd">$31,263</td>
+      </tr>
+      <tr>
+        <td class="asset-name">Amundi Core MSCI EM</td>
+        <td>7.00%</td><td>0.20%</td><td class="tag blue">6.55%</td>
+        <td class="units-cell">191.9915</td>
+        <td class="val-local">SGD 39,898</td>
+        <td class="val-usd">$31,263</td>
+      </tr>
+      <tr>
+        <td class="asset-name">Amundi MSCI World Fund</td>
+        <td>8.50%</td><td>0.07%</td><td class="tag green">8.18%</td>
+        <td class="units-cell">302.1046</td>
+        <td class="val-local">SGD 66,496</td>
+        <td class="val-usd">$52,105</td>
+      </tr>
+      <tr>
+        <td class="asset-name">Amundi Core Global Agg Bond</td>
+        <td>3.00%</td><td>0.10%</td><td class="tag neutral">2.65%</td>
+        <td class="units-cell">400.1276</td>
+        <td class="val-local">SGD 53,197</td>
+        <td class="val-usd">$41,684</td>
+      </tr>
+    </tbody>
+  </table>
+  <tr class="note-row"><td colspan="7" style="padding:6px 16px;font-size:11px;color:var(--muted);">* Net CAGR = Gross CAGR − TER − 0.25% Endowus platform fee · Blended net CAGR: ~6.93%</td></tr>
+</div>
+
+<!-- ========== OCBC ========== -->
+<h2>🏦 OCBC (SGD)</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">Savings &amp; Endowment Products</span>
+    <span class="section-total minor">SGD 112,115 ≈ $87,851</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Product</th><th>Maturity</th><th>SGD Value</th><th>≈ USD</th><th>Notes</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">SRS 2030 (cash)</td>
+        <td>—</td>
+        <td class="val-local">SGD 0.36</td>
+        <td class="val-usd">$0</td>
+        <td class="units-cell">Residual after Endowus transfer</td>
+      </tr>
+      <tr>
+        <td class="asset-name">Primegold 2030</td>
+        <td>2030</td>
+        <td class="val-local">SGD 46,000</td>
+        <td class="val-usd">$36,045</td>
+        <td class="units-cell">Matures at retirement</td>
+      </tr>
+      <tr>
+        <td class="asset-name">Maxgrowth 2028</td>
+        <td>2028</td>
+        <td class="val-local">SGD 66,115</td>
+        <td class="val-usd">$51,806</td>
+        <td class="units-cell">Matures 2yr early → reinvest</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== COL FINANCIAL ========== -->
+<h2>🇵🇭 Col Financial (PHP)</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">Philippine Equities &amp; Funds</span>
+    <span class="section-total minor">≈ $19,062</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Asset</th><th>Units</th><th>Price (PHP)</th><th>PHP Value</th><th>≈ USD</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">LTG <span class="tag">LT Group</span></td>
+        <td class="units-cell">57,100</td>
+        <td class="price-cell">₱15.02</td>
+        <td class="val-local">₱857,642</td>
+        <td class="val-usd">$14,184</td>
+      </tr>
+      <tr>
+        <td class="asset-name">CREIT <span class="tag">Energy REIT</span></td>
+        <td class="units-cell">68,000</td>
+        <td class="price-cell">₱3.49</td>
+        <td class="val-local">₱237,320</td>
+        <td class="val-usd">$3,925</td>
+      </tr>
+      <tr>
+        <td class="asset-name">BPI US Equity Fund</td>
+        <td class="units-cell">97.9993</td>
+        <td class="units-cell">—</td>
+        <td class="val-local">₱26,108</td>
+        <td class="val-usd">$432</td>
+      </tr>
+      <tr>
+        <td class="asset-name">SunLife Prosperity World Equity</td>
+        <td class="units-cell">13,766.12</td>
+        <td class="units-cell">—</td>
+        <td class="val-local">₱31,509</td>
+        <td class="val-usd">$521</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== PH GOV ========== -->
+<h2>🇵🇭 Philippines — Government &amp; Provident</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">Pagibig &amp; SSS</span>
+    <span class="section-total minor">≈ $17,601</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Account</th><th>PHP Balance</th><th>≈ USD</th><th>Est. CAGR</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">Pagibig MP2 <span class="tag green">7% div</span></td>
+        <td class="val-local">₱685,256</td>
+        <td class="val-usd">$11,333</td>
+        <td>7.0%</td>
+      </tr>
+      <tr>
+        <td class="asset-name">Pagibig MP1</td>
+        <td class="val-local">₱49,823</td>
+        <td class="val-usd">$824</td>
+        <td>5.0%</td>
+      </tr>
+      <tr>
+        <td class="asset-name">SSS <span class="tag neutral">Retirement</span></td>
+        <td class="val-local">₱329,128</td>
+        <td class="val-usd">$5,443</td>
+        <td>Fixed benefit</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== COLLECTIBLES ========== -->
+<h2>🃏 Collectibles</h2>
+<div class="section-card">
+  <div class="section-header">
+    <span class="section-title">Pokémon &amp; One Piece Cards</span>
+    <span class="section-total minor">$19,031</span>
+  </div>
+  <table>
+    <thead><tr><th>Asset</th><th>Currency</th><th>Value</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="asset-name">Pokémon + One Piece Cards</td>
+        <td>USD</td>
+        <td class="val-usd">$19,031</td>
+        <td class="units-cell">Held at cost — no market price modeled</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== 2030 PROJECTIONS ========== -->
+<h2>🔮 2030 Retirement Projections</h2>
+<p style="color:var(--muted);font-size:12px;margin-bottom:16px;">Based on current prices as of April 22, 2026. CAGR assumptions per asset class are estimates — see notes below. Monthly contributions not yet included.</p>
+
+<!-- Pre-redistribution table -->
+<h3>📅 Projected Portfolio Values at Retirement (Before Redistribution)</h3>
+<div class="section-card proj-table-wrap">
+  <table class="proj-table">
+    <thead class="proj-head"><tr>
+      <th style="text-align:left">Asset / Platform</th>
+      <th>CAGR (net)</th>
+      <th>April 2030 (4yr)</th>
+      <th>Oct 2030 (4.5yr)</th>
+    </tr></thead>
+    <tbody>
+      <tr class="highlight">
+        <td class="asset-name">AAPL (vested + unvested) <span class="tag orange">Sell for tax clearance</span></td>
+        <td>8.0%</td>
+        <td class="val-usd">$3,593,199</td>
+        <td class="val-usd">$3,734,162</td>
+      </tr>
+      <tr>
+        <td>eToro — NVDA</td><td>15.0%</td>
+        <td class="val-usd">$45,882</td><td class="val-usd">$49,203</td>
+      </tr>
+      <tr>
+        <td>eToro — GOOGL</td><td>10.0%</td>
+        <td class="val-usd">$77,948</td><td class="val-usd">$81,752</td>
+      </tr>
+      <tr>
+        <td>eToro — AMZN</td><td>11.0%</td>
+        <td class="val-usd">$39,972</td><td class="val-usd">$42,113</td>
+      </tr>
+      <tr>
+        <td>eToro — META</td><td>10.0%</td>
+        <td class="val-usd">$88,412</td><td class="val-usd">$92,727</td>
+      </tr>
+      <tr style="background:rgba(91,141,238,0.05)">
+        <td class="asset-name" style="padding-left:20px;font-style:italic;color:var(--accent)">eToro Subtotal</td>
+        <td>—</td>
+        <td class="val-usd" style="color:var(--accent)">$252,214</td>
+        <td class="val-usd" style="color:var(--accent)">$265,796</td>
+      </tr>
+      <tr>
+        <td>IBKR (CSPX + CNDX + VWRA, existing)</td>
+        <td>8.93/9.80/7.28%</td>
+        <td class="val-usd">$38,679</td><td class="val-usd">$40,234</td>
+      </tr>
+      <tr>
+        <td>Endowus SRS (gross, 5 funds)</td>
+        <td>~6.93% blend</td>
+        <td class="val-local">SGD 348,616 ≈ $273,167</td>
+        <td class="val-local">SGD 360,775 ≈ $282,695</td>
+      </tr>
+      <tr>
+        <td>Endowus SRS <strong>after SRS tax</strong> (~6% eff.)</td>
+        <td>—</td>
+        <td class="val-usd" style="color:var(--yellow)">$256,777</td>
+        <td class="val-usd" style="color:var(--yellow)">$265,733</td>
+      </tr>
+      <tr>
+        <td>OCBC (Primegold + Maxgrowth reinvested)</td>
+        <td>3.0/3.5%→reinvest</td>
+        <td class="val-local">SGD 135,811 ≈ $106,419</td>
+        <td class="val-local">SGD 140,254 ≈ $109,900</td>
+      </tr>
+      <tr>
+        <td>Philippines (stocks + funds + MP2 + SSS)</td>
+        <td>5-7%</td>
+        <td class="val-usd">$44,744</td><td class="val-usd">$45,895</td>
+      </tr>
+      <tr>
+        <td>Collectibles</td><td>0%</td>
+        <td class="val-usd">$19,031</td><td class="val-usd">$19,031</td>
+      </tr>
+      <tr class="total-row">
+        <td>🌟 GROSS TOTAL</td><td>—</td>
+        <td class="val-usd" style="color:var(--green);font-size:16px">$4,327,452</td>
+        <td class="val-usd" style="color:var(--green);font-size:16px">$4,497,712</td>
+      </tr>
+      <tr class="total-row">
+        <td>🌟 NET (after SRS tax)</td><td>—</td>
+        <td class="val-usd" style="color:var(--green);font-size:16px">$4,311,062</td>
+        <td class="val-usd" style="color:var(--green);font-size:16px">$4,480,751</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<h3>⚡ Scenario Comparison — April 2030 (Primary Target)</h3>
+<p style="color:var(--muted);font-size:12px;margin-bottom:16px;">What happens AFTER you sell eToro, withdraw Endowus SRS, and OCBC matures — and you redirect into IBKR.</p>
+
+<div class="scenario-grid">
+  <!-- SCENARIO A -->
+  <div class="scenario-card a">
+    <div class="scenario-head">🅰️ Scenario A — Pure ETF Core</div>
+    <div class="scenario-body">
+      <p style="color:var(--muted);font-size:12px;margin-bottom:12px;">eToro + Endowus SRS net + OCBC → IBKR ETFs (VWRA / CSPX / CSNDX)</p>
+      <div class="scenario-row"><span class="lbl">IBKR ETF Portfolio</span><span class="val" style="color:var(--accent)">$654,088</span></div>
+      <div class="scenario-row"><span class="lbl">→ from eToro proceeds</span><span class="val">$252,214</span></div>
+      <div class="scenario-row"><span class="lbl">→ from Endowus net</span><span class="val">$256,777</span></div>
+      <div class="scenario-row"><span class="lbl">→ from OCBC maturities</span><span class="val">$106,419</span></div>
+      <div class="scenario-row"><span class="lbl">→ IBKR existing (grown)</span><span class="val">$38,679</span></div>
+      <hr class="scenario-divider">
+      <div class="scenario-row"><span class="lbl">AAPL (to be sold)</span><span class="val" style="color:var(--orange)">$3,593,199</span></div>
+      <div class="scenario-row"><span class="lbl">Philippines + Collectibles</span><span class="val">$63,775</span></div>
+      <hr class="scenario-divider">
+      <div class="scenario-row" style="margin-top:8px;">
+        <span class="lbl" style="font-size:13px;font-weight:600">Total Portfolio</span>
+        <span class="scenario-total">$4,311,062</span>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--muted)">
+        ✅ Max diversification<br>
+        ✅ Lowest single-stock risk<br>
+        ✅ Passive, low-maintenance<br>
+        ⚠️ Lower upside vs. concentrated picks
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO B -->
+  <div class="scenario-card b">
+    <div class="scenario-head">🅱️ Scenario B — ETF Core + Single Stocks</div>
+    <div class="scenario-body">
+      <p style="color:var(--muted);font-size:12px;margin-bottom:12px;">eToro proceeds → AMZN + GOOGL in IBKR (50/50). Endowus + OCBC → IBKR ETFs.</p>
+      <div class="scenario-row"><span class="lbl">AMZN in IBKR</span><span class="val" style="color:#a78bfa">$126,107</span></div>
+      <div class="scenario-row"><span class="lbl">GOOGL in IBKR</span><span class="val" style="color:#a78bfa">$126,107</span></div>
+      <div class="scenario-row"><span class="lbl">ETF core (VWRA/CSPX/CSNDX)</span><span class="val" style="color:var(--accent)">$401,874</span></div>
+      <div class="scenario-row"><span class="lbl">→ IBKR Total</span><span class="val" style="color:#a78bfa">$654,088</span></div>
+      <hr class="scenario-divider">
+      <div class="scenario-row"><span class="lbl">AAPL (to be sold)</span><span class="val" style="color:var(--orange)">$3,593,199</span></div>
+      <div class="scenario-row"><span class="lbl">Philippines + Collectibles</span><span class="val">$63,775</span></div>
+      <hr class="scenario-divider">
+      <div class="scenario-row" style="margin-top:8px;">
+        <span class="lbl" style="font-size:13px;font-weight:600">Total Portfolio</span>
+        <span class="scenario-total">$4,311,062</span>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--muted)">
+        ✅ Familiar names (AMZN/GOOGL)<br>
+        ✅ Potential alpha over ETFs<br>
+        ⚠️ Higher single-stock risk<br>
+        ⚠️ Requires active monitoring
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.25);border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:var(--yellow)">
+  💡 <strong>Both scenarios arrive at the same total</strong> since we're redistributing the same pool of capital — the difference is <em>how</em> the non-AAPL portion is allocated at IBKR. Scenario B adds concentration risk, but AMZN &amp; GOOGL may outperform a basket. The key insight: your AAPL position alone (~83% of portfolio) will dominate returns regardless. Consider trimming AAPL concentration over time by directing new vests into IBKR ETFs.
+</div>
+
+<!-- OCTOBER 2030 COMPARISON -->
+<h3>📅 October 2030 Scenario (Waiting for Extra AAPL Vest)</h3>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:24px;">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center;">
+    <div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">AAPL (Oct 2030)</div>
+      <div style="font-size:18px;font-weight:700;color:var(--orange)">$3,734,162</div>
+      <div style="font-size:11px;color:var(--green)">+$140,963 vs Apr</div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">IBKR Pool</div>
+      <div style="font-size:18px;font-weight:700;color:var(--accent)">$681,663</div>
+      <div style="font-size:11px;color:var(--green)">+$27,575 vs Apr</div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Endowus Net</div>
+      <div style="font-size:18px;font-weight:700;color:var(--yellow)">$265,733</div>
+      <div style="font-size:11px;color:var(--green)">+$8,956 vs Apr</div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">FULL TOTAL</div>
+      <div style="font-size:18px;font-weight:700;color:var(--green)">$4,480,751</div>
+      <div style="font-size:11px;color:var(--green)">+$169,689 vs Apr</div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:12px;">Waiting 6 extra months yields ~+$169K additional value — primarily from AAPL appreciation (+$141K) plus ETF growth. Worth considering if another vest is scheduled for Oct 2030.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- NOTES -->
+<h2>📋 Assumptions &amp; Notes</h2>
+<div class="notes-grid">
+  <div class="note-card">
+    <strong>📈 Growth Rate Assumptions</strong>
+    AAPL: 8% · NVDA: 15% · GOOGL: 10% · AMZN: 11% · META: 10%<br>
+    CSPX (S&P500): 8.93% net · CNDX (NASDAQ100): 9.80% net · VWRA (All-World): 7.28% net<br>
+    Endowus blended: ~6.93% net (varies by fund)<br>
+    PH stocks: LTG 5% · CREIT 6% · MP2 7% · MP1 5%
+  </div>
+  <div class="note-card">
+    <strong>🇸🇬 SRS Withdrawal Tax (Singapore)</strong>
+    At retirement age (≥63): 50% of withdrawal is taxable income.<br>
+    ~12% effective rate on taxable portion → ~6% effective on gross.<br>
+    E.g. SGD 348,616 gross → ~SGD 20,917 tax → SGD 327,699 net.<br>
+    ⚠️ Verify your exact retirement age eligibility with CPF/IRAS.
+  </div>
+  <div class="note-card">
+    <strong>🏦 OCBC Products</strong>
+    Maxgrowth 2028 matures in 2 years — proceeds assumed reinvested into IBKR ETFs at 8.93% CAGR for remaining 2 years (Apr 2030 target).<br>
+    Primegold 2030 guaranteed maturity at ~3% CAGR.
+  </div>
+  <div class="note-card">
+    <strong>📝 What's NOT Included</strong>
+    Monthly new IBKR contributions (you mentioned these — add ~$X × 48 months).<br>
+    AAPL future vests between now and 2030.<br>
+    Dividends (CREIT, IBKR ETFs distributing).<br>
+    Currency FX movements (SGD/PHP vs USD).
+  </div>
+  <div class="note-card">
+    <strong>⚠️ Concentration Risk</strong>
+    AAPL represents 82.9% of total portfolio. Even with the post-retirement redistribution plan, AAPL will remain dominant until sold at tax clearance. This is unusually high single-stock concentration for a pre-retirement portfolio.
+  </div>
+  <div class="note-card">
+    <strong>🔄 The Post-2030 Plan</strong>
+    Sell eToro → redirect to IBKR (Scenario A: ETFs only; Scenario B: AMZN+GOOGL + ETFs).<br>
+    Withdraw Endowus SRS → pay tax → net into IBKR ETFs.<br>
+    OCBC matures → into IBKR.<br>
+    AAPL sold for tax clearance ~1–2 months before departure.
+  </div>
+</div>
+
+<div style="margin-top:28px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--muted);text-align:center;">
+  ⚠️ This report is for personal planning reference only. All projections are estimates based on assumed CAGR rates. Past performance does not guarantee future results. Consult a licensed financial advisor and tax professional before making investment decisions. · Generated by Enchanté · Apple AI for Devs Community
+</div>
+
+</body>
+</html>
